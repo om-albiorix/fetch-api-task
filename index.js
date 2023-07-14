@@ -34,7 +34,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-// const myModal : any = new bootstrap.Modal(document.getElementById('modalId'), options)
 function myfetchApiFunc() {
     return __awaiter(this, void 0, void 0, function () {
         var response, data, error_1;
@@ -49,7 +48,7 @@ function myfetchApiFunc() {
                 case 2:
                     data = _a.sent();
                     data.forEach(function (element) {
-                        var markup = "<td class=\"border border-dark p-1\">".concat(element.userId, "</td>\n          <td class=\"border border-dark p-1\">").concat(element.id, "</td>\n          <td class=\"border border-dark p-1\">").concat(element.title, "</td>\n          <td class=\"border border-dark p-1\">").concat(element.completed, "</td>\n       <td class=\"border border-dark p-1\">\n       <button class=\"btn btn-dark\" type=\"button\"  onclick=\"showData(").concat(element.id, ")\"  data-bs-toggle=\"modal\" data-bs-target=\"#modalId\">view</button>\n       </td>");
+                        var markup = "<td class=\"border border-dark p-1\">".concat(element.userId, "</td>\n          <td class=\"border border-dark p-1\">").concat(element.id, "</td>\n          <td class=\"border border-dark p-1\">").concat(element.title, "</td>\n          <td class=\"border border-dark p-1\">").concat(element.completed, "</td>\n       <td class=\"border border-dark p-1\">\n       <button class=\"btn btn-dark\" type=\"button\"  onclick=\"showData(").concat(element.id, ")\" data-toggle=\"modal\" data-target=\"#exampleModal\">view</button>\n       </td>");
                         var table = document.querySelector("table");
                         if (table) {
                             table.insertAdjacentHTML("beforeend", markup);
@@ -68,7 +67,7 @@ function myfetchApiFunc() {
 myfetchApiFunc();
 function showData(i) {
     return __awaiter(this, void 0, void 0, function () {
-        var response, data, myDatashow, popup;
+        var response, data, myDatashow, getData;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, fetch("https://jsonplaceholder.typicode.com/todos/".concat(i))];
@@ -77,13 +76,16 @@ function showData(i) {
                     return [4 /*yield*/, response.json()];
                 case 2:
                     data = _a.sent();
-                    myDatashow = "\n<div class=\"modal fade\" id=\"modalId\" tabindex=\"-1\" data-bs-backdrop=\"static\" data-bs-keyboard=\"false\" role=\"dialog\" aria-labelledby=\"modalTitleId\" aria-hidden=\"true\">\n  <div class=\"modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h5 class=\"modal-title\" id=\"modalTitleId\">Modal title</h5>\n          <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\n      </div>\n      <div class=\"modal-body\">\n        Body\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>\n        <button type=\"button\" class=\"btn btn-primary\">Save</button>\n      </div>\n    </div>\n  </div>\n</div>";
-                    popup = document.querySelector(".popupopen");
-                    if (popup) {
-                        popup.insertAdjacentHTML("afterbegin", myDatashow);
+                    myDatashow = "\n<div class=\"modal fade\" id=\"exampleModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n  <div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h5 class=\"modal-title\" id=\"exampleModalLabel\">Data listing</h5>\n        <button onclick=\"refreshPage()\" type=\"button\" class=\"close border-none\" data-dismiss=\"modal\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n      <table class=\"text-center m-auto border border-dark\">\n      <tr class=\"border-collapse\">\n      <th class=\"border border-dark\">Id<th/>\n      <th class=\"border border-dark\">Data no.<th>\n      <th class=\"border border-dark\">Data Name<th>\n      <th class=\"border border-dark\">Get or not<th>\n      </tr>\n      <tr class=\"border-collapse\">\n      <td class=\"border border-dark p-1\">".concat(data.userId, "<td/>\n      <td class=\"border border-dark p-1\">").concat(data.id, "<td/>\n      <td class=\"border border-dark p-1\">").concat(data.title, "<td/>\n      <td class=\"border border-dark p-1\">").concat(data.completed, "<td/>\n      <tr/>\n      </table>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n      </div>\n    </div>\n  </div>\n</div>");
+                    getData = document.querySelector(".popupopen");
+                    if (getData) {
+                        getData.insertAdjacentHTML("beforeend", myDatashow);
                     }
                     return [2 /*return*/];
             }
         });
     });
+}
+function refreshPage() {
+    window.location.reload();
 }
